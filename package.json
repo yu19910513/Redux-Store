@@ -5,13 +5,13 @@
   "main": "server/server.js",
   "homepage": "https://yu19910513.github.io/Redux-Store",
   "scripts": {
-    "start": "node server/server.js",
+    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
+    "start:dev": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
+    "start:prod": "cd server && npm start",
     "develop": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
     "install": "cd server && npm i && cd ../client && npm i",
     "seed": "cd server && npm run seed",
-    "build": "cd client && npm run build",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -b main -d client/build"
+    "heroku-postbuild": "cd client && npm run build"
   },
   "keywords": [],
   "author": "",
